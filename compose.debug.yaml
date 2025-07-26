@@ -1,0 +1,12 @@
+services:
+  financetracker:
+    image: financetracker
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: development
+    ports:
+      - 61003:61003
+      - 9229:9229
+    command: ["node", "--inspect=0.0.0.0:9229", "index.js"]

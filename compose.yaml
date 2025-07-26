@@ -1,0 +1,10 @@
+services:
+  financetracker:
+    image: financetracker
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 61003:3000
+    volumes:
+      - ./:/usr/src/app
