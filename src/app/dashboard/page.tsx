@@ -1,8 +1,7 @@
 import stylesFilter from './filter.module.css'
 import stylesDashboard from './dashboard.module.css'
-import stylesNavbar from './navbar.module.css'
 
-export default function page() {
+export default async function page() {
   return (
     <>
       <div className='p-8 mb-8'>
@@ -14,12 +13,10 @@ export default function page() {
               <label>Start Date</label>
               <input type="date" name="start_date" />
             </div>
-
             <div className={stylesFilter['filter-group']}>
               <label>End Date</label>
               <input type="date" name="end_date" />
             </div>
-
             <div className={stylesFilter['filter-group']}>
               <label>Category</label>
               <select name="category">
@@ -29,7 +26,6 @@ export default function page() {
                 <option value="salary">Salary</option>
               </select>
             </div>
-
             <div className={stylesFilter['filter-group']}>
               <label>Type</label>
               <select name="type">
@@ -38,7 +34,6 @@ export default function page() {
                 <option value="expense">Expense</option>
               </select>
             </div>
-
             <button type="submit" className={stylesFilter.submit}>Apply Filter</button>
           </form>
         </div>
@@ -59,12 +54,6 @@ export default function page() {
           </div>
         </div>
       </div>
-      <nav className={stylesNavbar['responsive-nav']}>
-        <a href="#dashboard">Dashboard</a>
-        <a href="#transactions">Transactions</a>
-        <a href="#categories">Categories</a>
-        <a href="#logout">Logout</a>
-      </nav>
     </>
   )
 }

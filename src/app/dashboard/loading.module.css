@@ -1,0 +1,62 @@
+.dashboard-skeleton {
+  padding: 2rem;
+  font-family: sans-serif;
+}
+
+.skeleton-title {
+  height: 24px;
+  width: 30%;
+  background: #e5e7eb;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.skeleton-totals {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.skeleton-box {
+  flex: 1;
+  height: 80px;
+  background: #e5e7eb;
+  border-radius: 12px;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.skeleton-filter {
+  width: 50%;
+  height: 36px;
+  background: #e5e7eb;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.skeleton-chart {
+  height: 160px;
+  background: #e5e7eb;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.skeleton-list .skeleton-row {
+  height: 48px;
+  background: #e5e7eb;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+/* Pulse animation */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
