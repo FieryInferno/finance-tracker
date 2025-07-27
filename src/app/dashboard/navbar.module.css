@@ -1,0 +1,43 @@
+/* Base (Mobile: Bottom Navigation) */
+.responsive-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #1f2937;
+  display: flex;
+  justify-content: space-around;
+  padding: 0.75rem 0;
+  z-index: 1000;
+}
+
+.responsive-nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+/* Desktop: Side Navigation */
+@media screen and (min-width: 768px) {
+  .responsive-nav {
+    flex-direction: column;
+    width: 200px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 2rem 1rem;
+    gap: 1.25rem;
+  }
+
+  .responsive-nav a {
+    font-size: 1rem;
+  }
+
+  body {
+    margin-left: 200px; /* Prevent content overlap */
+  }
+}
