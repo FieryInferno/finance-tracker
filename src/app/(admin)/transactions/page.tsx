@@ -1,7 +1,6 @@
 import styles from './page.module.css'
 
 export default async function TransactionsPage() {
-  await new Promise((resolve) => setTimeout(() => resolve(true), 5000))
   return (
     <div className={styles['riwayat-container']}>
       <h2 className='font-bold text-3xl mb-4'>Riwayat Transaksi</h2>
