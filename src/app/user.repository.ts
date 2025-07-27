@@ -13,8 +13,8 @@ import { isDevelopment } from '@/app/utils'
  * in the first column (A) and the password in the second column (B).
  * 
  * Environment Variables Required:
- * - `NEXT_PUBLIC_SPREADSHEET_ID`: The ID of the Google Spreadsheet.
- * - `NEXT_PUBLIC_API_KEY_GOOGLESHEET`: The API key with access to the Sheets API.
+ * - `SPREADSHEET_ID`: The ID of the Google Spreadsheet.
+ * - `API_KEY_GOOGLESHEET`: The API key with access to the Sheets API.
  * 
  * @example
  * const repo = new UserRepository();
@@ -31,8 +31,8 @@ export default class UserRepository implements UserRepositoryInterface {
    */
   async get(params?: { email?: string }): Promise<User | null> {
     try {
-      const SPREADSHEET_ID = process.env.NEXT_PUBLIC_SPREADSHEET_ID
-      const API_KEY_GOOGLESHEET = process.env.NEXT_PUBLIC_API_KEY_GOOGLESHEET
+      const SPREADSHEET_ID = process.env.SPREADSHEET_ID
+      const API_KEY_GOOGLESHEET = process.env.API_KEY_GOOGLESHEET
       const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/Sheet1!A2:B1000?key=${API_KEY_GOOGLESHEET}`)
       const { values } = await response.json() ?? {}
       const data = values.find((value: string[]) => value[0] === params?.email)
