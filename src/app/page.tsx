@@ -1,6 +1,6 @@
 'use client'
 
-import { login } from '@/app/actions/actions'
+import { login } from '@/app/_actions/actions'
 import { useActionState } from 'react';
 
 export default function Home() {

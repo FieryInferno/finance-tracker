@@ -1,0 +1,38 @@
+.transaction-skeleton {
+  font-family: sans-serif;
+}
+
+.skeleton-header {
+  height: 24px;
+  width: 40%;
+  background: #e5e7eb;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.skeleton-button {
+  height: 40px;
+  width: 160px;
+  background: #e5e7eb;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.skeleton-rows .skeleton-row {
+  height: 56px;
+  background: #e5e7eb;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}

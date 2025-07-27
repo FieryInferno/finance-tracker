@@ -17,9 +17,9 @@ import { redirect } from 'next/navigation'
  */
 const LoginFormSchema = new Validator().object({ email: new Validator().string().email() })
 export const login = async (
-  state: { errors?: { email?: string[] } } | undefined,
+  state: void | { errors?: { email?: string[] } } | undefined,
   formData: FormData
-): Promise<{ message?: string; errors?: { email?: string[] } } | void> => {
+): Promise<{ message?: string; errors?: { email?: string[] } }> => {
   const email = formData.get('email')
   const validatedFields = LoginFormSchema.safeParse({ email })
 
