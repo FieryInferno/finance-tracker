@@ -1,0 +1,55 @@
+.dashboard-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 2rem;
+  font-family: sans-serif;
+}
+
+.summary-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.card {
+  flex: 1;
+  min-width: 220px;
+  background: #f3f4f6;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.cardH3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+}
+
+.cardP {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.pemasukan {
+  border-left: 6px solid #22c55e;
+}
+
+.pengeluaran {
+  border-left: 6px solid #ef4444;
+}
+
+.saldo {
+  border-left: 6px solid #3b82f6;
+}
+.cardPemasukan {
+  composes: card pemasukan;
+}
+.cardPengeluaran {
+  composes: card pengeluaran;
+}
+.cardSaldo {
+  composes: card saldo;
+}
