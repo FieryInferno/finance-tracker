@@ -8,6 +8,10 @@ export default class CategoryUseCase {
     this.categoryRepository = categoryRepository
   }
   async create(name: string, color: string): Promise<Category> {
-    return await this.categoryRepository.create(name, color)
+    const response = await this.categoryRepository.create(name, color)
+
+    if ('error' in response) throw new Error(response.error)
+
+    return response
   }
 }

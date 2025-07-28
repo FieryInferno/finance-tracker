@@ -8,18 +8,37 @@ import { createSession } from '@/app/session'
 import { redirect } from 'next/navigation'
 
 /**
- * Handles user login by validating the provided form data and invoking the login service.
+ * Handles user login by validating the email from form data,
+ * attempting to authenticate via the login service, and managing session creation.
  *
- * @param state - The current state object containing optional message and errors.
- * @param formData - The form data containing user credentials (email and password).
- * @returns A promise that resolves to an object containing either a success message,
- *          or error messages if validation or authentication fails.
+ * @param state - Optional previous state that may contain validation errors.
+ *                This is typically used in server actions to retain form state.
+ * @param formData - The `FormData` object containing login fields, specifically `email` and `password`.
+ *
+ * @returns A promise that resolves to:
+ * - An object containing `errors` if validation fails,
+ * - An object containing a `message` if login or session creation fails,
+ * - Or redirects the user to `/dashboard` on success.
+ *
+ * @throws Never throws directly — all errors are caught and returned as messages.
+ *
+ * @example
+ * ```ts
+ * const result = await login(undefined, formData)
+ * if (result.errors) {
+ *   // show form validation errors
+ * } else if (result.message) {
+ *   // show login failed message
+ * } else {
+ *   // user is redirected
+ * }
+ * ```
  */
-const LoginFormSchema = new Validator().object({ email: new Validator().string().email() })
 export const login = async (
   state: void | { errors?: { email?: string[] } } | undefined,
   formData: FormData
 ): Promise<{ message?: string; errors?: { email?: string[] } }> => {
+  const LoginFormSchema = new Validator().object({ email: new Validator().string().email() })
   const email = formData.get('email')
   const validatedFields = LoginFormSchema.safeParse({ email })
 

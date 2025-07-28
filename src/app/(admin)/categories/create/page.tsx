@@ -1,5 +1,5 @@
 import FormCategory from '@/app/(admin)/categories/create/form-category.component'
-import { createCategory } from '@/app/(admin)/categories/create/actions'
+import { createCategory } from '@/app/(admin)/categories/create/_actions/actions'
 
 export default function CreateCategoriesPage() {
   return (

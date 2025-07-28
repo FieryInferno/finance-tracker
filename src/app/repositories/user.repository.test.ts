@@ -1,4 +1,4 @@
-import UserRepository from '@/app/user.repository'
+import UserRepository from './user.repository'
 
 jest.mock('@/app/utils', () => ({
   isDevelopment: true
