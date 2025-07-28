@@ -1,0 +1,29 @@
+.kategori-container {
+  max-width: 400px;
+  margin: auto;
+  padding: 1rem;
+  font-family: sans-serif;
+}
+
+.form-kategori {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.input, .button {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.button {
+  background-color: #3b82f6;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #2563eb;
+}

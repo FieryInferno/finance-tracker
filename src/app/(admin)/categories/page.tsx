@@ -1,7 +1,7 @@
 import styles from './page.module.css'
+import Link from 'next/link'
 
 export default async function CategoriesPage() {
-  await new Promise((resolve) => setTimeout(() => resolve(true), 5000))
   return (
     <div className={styles['kategori-list-container']}>
       <h2 className='font-bold mb-4 text-2xl'>Your Categories</h2>
@@ -17,7 +17,7 @@ export default async function CategoriesPage() {
           <button className={styles['kategori-delete']}>Delete</button>
         </li>
       </ul>
-      <button className={styles.fab}>+</button>
+      <Link className={styles.fab} href={'/categories/create'}>+</Link>
     </div>
   )
 }
