@@ -1,4 +1,4 @@
-import UserRepositoryInterface from '@/app/user.repository.interface'
+import UserRepositoryInterface from '@/app/repositories/user.repository.interface'
 import { User } from '@/app/types'
 import AuthError from '@/app/auth.error'
 
