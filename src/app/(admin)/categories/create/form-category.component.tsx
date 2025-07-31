@@ -1,16 +1,28 @@
 'use client'
 
-import { useActionState } from 'react'
+import { useActionState, useEffect } from 'react'
 import styles from './form-category.component.module.css'
 import { FormCategoryState } from './types';
-import { Category } from './types';
+import toast, { Toaster } from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 type FormCategory = (
-  state: void | FormCategoryState | undefined, formData: FormData
+  state: void | FormCategoryState, formData: FormData
 ) => Promise<FormCategoryState>
 
 export default function FormCategory({ createCategory }: { createCategory: FormCategory }) {
   const [state, action, pending] = useActionState(createCategory, undefined)
+  const router = useRouter()
+
+  useEffect(() => {
+    if (state?.data) {
+      toast.success('Success create category')
+
+      const timer = setTimeout(() => router.push('/categories'), 2000);
+
+      return () => clearTimeout(timer)
+    }
+  }, [state])
 
   return (
     <>
@@ -22,6 +34,7 @@ export default function FormCategory({ createCategory }: { createCategory: FormC
           <span className="font-medium">Error!&nbsp;</span> {state.error}
         </div>
       }
+      <Toaster position='top-right' />
       <form className={styles['form-kategori']} action={action}>
         <label>Category Name</label>
         <input type="text" name="name" placeholder="e.g. Groceries" required className={styles.input} />

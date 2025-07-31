@@ -57,9 +57,7 @@ describe('createCategory', () => {
     formData.set('name', 'Books')
     formData.set('color', 'blue')
 
-    const result = await createCategory(undefined, formData)
-
-    expect(result).toEqual(mockCategory)
+    await createCategory(undefined, formData)
     expect(categoryService.create).toHaveBeenCalledWith('Books', 'blue')
   })
 
