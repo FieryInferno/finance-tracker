@@ -1,0 +1,26 @@
+.kategori-list-container {
+  max-width: 400px;
+  font-family: sans-serif;
+}
+.fab {
+  position: fixed;
+  bottom: 4rem;
+  right: 1.5rem;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #2563eb;
+  color: white;
+  font-size: 24px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+@media (width >= 64rem) {
+  .fab {
+    bottom: 1.5rem;
+  }
+}

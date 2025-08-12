@@ -1,5 +1,5 @@
-import { createCategory } from './actions'
-import categoryService from '@/app/(admin)/categories/create/category.service'
+import { create } from './actions'
+import categoryService from '@/app/(admin)/categories/category.service'
 import Validator from '@/app/validator'
 import { isDevelopment } from '@/app/utils'
 
@@ -19,7 +19,7 @@ const mockValidatorInstance = {
 
 ;(Validator as jest.Mock).mockImplementation(() => mockValidatorInstance)
 
-describe('createCategory', () => {
+describe('create', () => {
   beforeEach(() => {
     jest.clearAllMocks()
   })
@@ -38,7 +38,7 @@ describe('createCategory', () => {
     formData.set('name', '')
     formData.set('color', 'red')
 
-    const result = await createCategory(undefined, formData)
+    const result = await create(undefined, formData)
 
     expect(result).toEqual({
       errors: {
@@ -57,7 +57,7 @@ describe('createCategory', () => {
     formData.set('name', 'Books')
     formData.set('color', 'blue')
 
-    await createCategory(undefined, formData)
+    await create(undefined, formData)
     expect(categoryService.create).toHaveBeenCalledWith('Books', 'blue')
   })
 
@@ -69,7 +69,7 @@ describe('createCategory', () => {
     formData.set('name', 'Books')
     formData.set('color', 'blue')
 
-    const result = await createCategory(undefined, formData)
+    const result = await create(undefined, formData)
 
     expect(result).toEqual({ error: 'Failed create category' })
   })

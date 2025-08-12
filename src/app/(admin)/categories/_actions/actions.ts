@@ -1,11 +1,11 @@
 'use server'
 
 import Validator from "@/app/validator";
-import categoryService from '@/app/(admin)/categories/create/category.service'
+import categoryService from '@/app/(admin)/categories/category.service'
 import { isDevelopment } from "@/app/utils";
-import { FormCategoryState } from "../types";
+import { FormCategoryState, Category } from "../types";
 
-export const createCategory = async (
+export const create = async (
   state: void | FormCategoryState,
   formData: FormData
 ): Promise<FormCategoryState> => {
@@ -24,3 +24,4 @@ export const createCategory = async (
     return { error: 'Failed create category' }
   }
 }
+export const read = async (): Promise<Category[]> => await categoryService.read()
