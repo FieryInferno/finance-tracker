@@ -20,14 +20,3 @@
   margin-left: 0.5rem;
   font-weight: 500;
 }
-.kategori-delete {
-  background: #ef4444;
-  color: white;
-  border: none;
-  padding: 0.3rem 0.75rem;
-  border-radius: 4px;
-  cursor: pointer;
-}
-.kategori-delete:hover {
-  background: #dc2626;
-}
