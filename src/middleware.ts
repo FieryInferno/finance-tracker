@@ -17,7 +17,7 @@ export default async (req: NextRequest): Promise<NextResponse> => {
   const { pathname } = req.nextUrl
 
   if (pathname === '/dashboard' && !session?.userId) return NextResponse.redirect(new URL('/login', req.nextUrl))
-  if (pathname === '/login' && session?.userId && !pathname.startsWith('/dashboard')) return NextResponse.redirect(new URL('/dashboard', req.nextUrl))
+  if ((pathname === '/login' || pathname === '/') && session?.userId && !pathname.startsWith('/dashboard')) return NextResponse.redirect(new URL('/dashboard', req.nextUrl))
 
   return NextResponse.next()
 }
