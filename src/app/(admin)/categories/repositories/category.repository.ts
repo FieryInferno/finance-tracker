@@ -2,23 +2,22 @@ import CategoryRepositoryInterface from '@/app/(admin)/categories/repositories/c
 import CategoryModel from '../category.entity'
 import { isDevelopment } from '@/app/utils'
 import { Category } from '../types'
+import { v4 as uuidv4 } from 'uuid'
 
 export default class CategoryRepository implements CategoryRepositoryInterface {
   async create(name: string, color: string) {
-    try {
-      const body = new FormData()
+    const body = new FormData()
+    const id_category = uuidv4()
 
-      body.set('name', name)
-      body.set('color', color)
+    body.set('type', 'CREATE')
+    body.set('id_category', id_category)
+    body.set('name', name)
+    body.set('color', color)
 
-      await fetch('https://script.google.com/macros/s/AKfycbxPh5CZ4oyDmX1mHMEVuNRxMAPNso5VB0fJGw_Q0QOCZcio2ke9z-7hKE5h-S5aQA9r/exec', { body, method: 'POST' })
-
-      return { name, color }
-    } catch (error: unknown) {
-      if (isDevelopment) console.error(error)
-
-      return { error: error instanceof Error ? error?.message : 'Failed to create category' }
-    }
+    return await this.handleResponse<{ values: Array<Array<string>> }, Category>(
+      fetch('https://script.google.com/macros/s/AKfycbx5oJ9OLZOWK6mZ-0-3hVu-pxvddk_76GdvBBuCOHCoDljJHPiUsG0cYAAErcP9GorF9g/exec', { body, method: 'POST' }),
+      () => ({ id_category, name, color })
+    )
   }
 
   /**
@@ -86,7 +85,7 @@ export default class CategoryRepository implements CategoryRepositoryInterface {
    *          - `error`: A string describing the error if it occurred, otherwise `null`.
    */
   read = async () => await this.handleResponse<{ values: Array<Array<string>> }, Category[]>(
-    fetch(`${process.env.URL_GOOGLE_SHEET}Categories!A2:B1000?key=${process.env.API_KEY_GOOGLESHEET}`),
-    (data) => (data.values ?? []).map(([name, color]) => CategoryModel.fromJson({ name, color }))
+    fetch(`${process.env.URL_GOOGLE_SHEET}Categories!A2:C1000?key=${process.env.API_KEY_GOOGLESHEET}`),
+    (data) => (data.values ?? []).map(([id_category, name, color]) => CategoryModel.fromJson({ id_category, name, color }))
   )
 }
