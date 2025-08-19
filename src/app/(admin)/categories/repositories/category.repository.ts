@@ -5,6 +5,9 @@ import { Category } from '../types'
 import { v4 as uuidv4 } from 'uuid'
 
 export default class CategoryRepository implements CategoryRepositoryInterface {
+  private URL_POST_GOOGLE_SHEET: string =
+    'https://script.google.com/macros/s/AKfycbxgTt1lMBzpaMHAm5SUpVTAGZD_Qo_Ur4l6NhiQonexJEQDOoW7CSHJrRo9-aSywM79EQ/exec'
+
   async create(name: string, color: string) {
     const body = new FormData()
     const id_category = uuidv4()
@@ -14,10 +17,14 @@ export default class CategoryRepository implements CategoryRepositoryInterface {
     body.set('name', name)
     body.set('color', color)
 
-    return await this.handleResponse<{ values: Array<Array<string>> }, Category>(
-      fetch('https://script.google.com/macros/s/AKfycbx5oJ9OLZOWK6mZ-0-3hVu-pxvddk_76GdvBBuCOHCoDljJHPiUsG0cYAAErcP9GorF9g/exec', { body, method: 'POST' }),
-      () => ({ id_category, name, color })
-    )
+    return await this.handleResponse<
+      { values: Array<Array<string>> },
+      Category
+    >(fetch(this.URL_POST_GOOGLE_SHEET, { body, method: 'POST' }), () => ({
+      id_category,
+      name,
+      color
+    }))
   }
 
   /**
@@ -50,16 +57,20 @@ export default class CategoryRepository implements CategoryRepositoryInterface {
    *   console.log(result.data);
    * }
    */
-  private async handleResponse<
-    TResponseJson, TFinalData
-  >(promise: Promise<Response>, generateData: (param: TResponseJson) => TFinalData): Promise<{ data: TFinalData | null, error: string | null }> {
+  private async handleResponse<TResponseJson, TFinalData>(
+    promise: Promise<Response>,
+    generateData: (param: TResponseJson) => TFinalData
+  ): Promise<{ data: TFinalData | null; error: string | null }> {
     try {
       const response = await promise
 
       if (!response.ok) {
         const errText = await response.text().catch(() => '')
 
-        return { data: null, error: `Request failed (${response.status}): ${errText || response.statusText}` }
+        return {
+          data: null,
+          error: `Request failed (${response.status}): ${errText || response.statusText}`
+        }
       }
 
       let json: TResponseJson
@@ -73,8 +84,23 @@ export default class CategoryRepository implements CategoryRepositoryInterface {
     } catch (error) {
       if (isDevelopment) console.error(error)
 
-      return { data: null, error: error instanceof Error ? error.message : 'Unknown error occurred' }
+      return {
+        data: null,
+        error: error instanceof Error ? error.message : 'Unknown error occurred'
+      }
     }
+  }
+
+  async delete(id_category: string) {
+    const body = new FormData()
+
+    body.set('type', 'DELETE')
+    body.set('id_category', id_category)
+
+    return await this.handleResponse<{ values: Array<Array<string>> }, string>(
+      fetch(this.URL_POST_GOOGLE_SHEET, { body, method: 'POST' }),
+      () => id_category
+    )
   }
 
   /**
@@ -84,8 +110,14 @@ export default class CategoryRepository implements CategoryRepositoryInterface {
    *          - `data`: An array of `Category` objects if successful, or `null` on error.
    *          - `error`: A string describing the error if it occurred, otherwise `null`.
    */
-  read = async () => await this.handleResponse<{ values: Array<Array<string>> }, Category[]>(
-    fetch(`${process.env.URL_GOOGLE_SHEET}Categories!A2:C1000?key=${process.env.API_KEY_GOOGLESHEET}`),
-    (data) => (data.values ?? []).map(([id_category, name, color]) => CategoryModel.fromJson({ id_category, name, color }))
-  )
+  read = async () =>
+    await this.handleResponse<{ values: Array<Array<string>> }, Category[]>(
+      fetch(
+        `${process.env.URL_GOOGLE_SHEET}Categories!A2:C1000?key=${process.env.API_KEY_GOOGLESHEET}`
+      ),
+      (data) =>
+        (data.values ?? []).map(([id_category, name, color]) =>
+          CategoryModel.fromJson({ id_category, name, color })
+        )
+    )
 }

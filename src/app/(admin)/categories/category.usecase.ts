@@ -7,14 +7,22 @@ export default class CategoryUseCase {
   constructor(categoryRepository: CategoryRepositoryInterface) {
     this.categoryRepository = categoryRepository
   }
-  private async handleResponse<T>(promise: Promise<any>): Promise<T> {
+  private async handleResponse<T>(
+    promise: Promise<{ data: T | null; error: string | null }>
+  ): Promise<T> {
     const { error, ...response } = await promise
 
     if (error) throw new Error(error)
 
-    return response.data
+    return response.data as T
   }
 
-  create = async (name: string, color: string): Promise<Category> => this.handleResponse(this.categoryRepository.create(name, color))
-  read = async (): Promise<Category[]> => await this.handleResponse<Category[]>(this.categoryRepository.read())
+  create = async (name: string, color: string): Promise<Category> =>
+    this.handleResponse(this.categoryRepository.create(name, color))
+  read = async (): Promise<Category[]> =>
+    await this.handleResponse<Category[]>(this.categoryRepository.read())
+  delete = async (id_category: string) =>
+    await this.handleResponse<string>(
+      this.categoryRepository.delete(id_category)
+    )
 }

@@ -4,7 +4,6 @@ jest.mock('@/app/utils', () => ({
   isDevelopment: true
 }))
 
-
 describe('UserRepository', () => {
   const originalFetch = global.fetch
 
@@ -17,13 +16,13 @@ describe('UserRepository', () => {
     const mockData = {
       values: [
         ['test@example.com', 'password123'],
-        ['other@example.com', 'pass456'],
+        ['other@example.com', 'pass456']
       ]
     }
 
     global.fetch = jest.fn().mockResolvedValue({
       ok: true,
-      json: async () => mockData,
+      json: async () => mockData
     })
 
     const repo = new UserRepository()
@@ -34,14 +33,12 @@ describe('UserRepository', () => {
 
   it('should return null when email is not found', async () => {
     const mockData = {
-      values: [
-        ['notmatch@example.com', 'password123']
-      ]
+      values: [['notmatch@example.com', 'password123']]
     }
 
     global.fetch = jest.fn().mockResolvedValue({
       ok: true,
-      json: async () => mockData,
+      json: async () => mockData
     })
 
     const repo = new UserRepository()
@@ -59,7 +56,7 @@ describe('UserRepository', () => {
 
     global.fetch = jest.fn().mockResolvedValue({
       ok: true,
-      json: async () => mockData,
+      json: async () => mockData
     })
 
     const repo = new UserRepository()

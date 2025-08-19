@@ -4,10 +4,10 @@ import AuthError from '@/app/auth.error'
 
 /**
  * Use case class responsible for handling user login logic.
- * 
+ *
  * This class encapsulates the authentication process by validating
  * a user's email and password through the provided `UserRepositoryInterface`.
- * 
+ *
  * Throws an `AuthError` if authentication fails.
  */
 
@@ -20,7 +20,7 @@ export default class LoginUseCase {
 
   /**
    * Constructs a new instance of the `LoginUseCase` with the given repository.
-   * 
+   *
    * @param userRepository - A repository that implements `UserRepositoryInterface`,
    *                         used to retrieve user data.
    */
@@ -30,7 +30,7 @@ export default class LoginUseCase {
 
   /**
    * Attempts to authenticate a user using their email and password.
-   * 
+   *
    * @param email - The user's email address.
    * @param password - The user's plaintext password.
    * @returns A `User` object if authentication succeeds.

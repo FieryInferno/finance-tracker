@@ -15,7 +15,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest --silent"
+    "test": "jest --silent",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "jose": "^6.0.12",
@@ -35,6 +36,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.4.4",
+    "prettier": "3.6.2",
     "tailwindcss": "^4",
     "ts-jest": "^29.4.0",
     "typescript": "^5"

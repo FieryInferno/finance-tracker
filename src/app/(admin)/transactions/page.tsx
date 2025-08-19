@@ -9,8 +9,16 @@ export default async function TransactionsPage() {
           <div className={styles['transaksi-info']}>
             <span className={styles['transaksi-tanggal']}>25 Juli 2025</span>
             <span className={styles['transaksi-kategori']}>Makanan</span>
-            <span className={styles['transaksi-catatan']}>Beli nasi goreng</span>
-            <a className={styles['bukti-link']} href="/uploads/bukti1.jpg" target="_blank">View Receipt</a>
+            <span className={styles['transaksi-catatan']}>
+              Beli nasi goreng
+            </span>
+            <a
+              className={styles['bukti-link']}
+              href='/uploads/bukti1.jpg'
+              target='_blank'
+            >
+              View Receipt
+            </a>
           </div>
           <div className={styles['transaksi-nominalKeluar']}>- Rp25.000</div>
         </li>
@@ -19,7 +27,13 @@ export default async function TransactionsPage() {
             <span className={styles['transaksi-tanggal']}>24 Juli 2025</span>
             <span className={styles['transaksi-kategori']}>Gaji</span>
             <span className={styles['transaksi-catatan']}>Gaji bulanan</span>
-            <a className={styles['bukti-link']} href="/uploads/bukti1.jpg" target="_blank">View Receipt</a>
+            <a
+              className={styles['bukti-link']}
+              href='/uploads/bukti1.jpg'
+              target='_blank'
+            >
+              View Receipt
+            </a>
           </div>
           <div className={styles['transaksi-nominalMasuk']}>+ Rp3.000.000</div>
         </li>

@@ -1,6 +1,6 @@
 'server-only'
 
-import { cookies } from "next/headers"
+import { cookies } from 'next/headers'
 import { jwtVerify, SignJWT } from 'jose'
 
 /**
@@ -15,9 +15,12 @@ const encodedKey = new TextEncoder().encode(process.env.SESSION_SECRET)
  * @param {{ userId: string, expiresAt: Date }} payload - The session payload to encrypt.
  * @returns {Promise<string>} A signed JWT string.
  */
-const encrypt =
-  (payload: { userId: string, expiresAt: Date }) => new SignJWT(payload)
-    .setProtectedHeader({ alg: 'HS256' }).setIssuedAt().setExpirationTime('1d').sign(encodedKey)
+const encrypt = (payload: { userId: string; expiresAt: Date }) =>
+  new SignJWT(payload)
+    .setProtectedHeader({ alg: 'HS256' })
+    .setIssuedAt()
+    .setExpirationTime('1d')
+    .sign(encodedKey)
 
 /**
  * Verifies and decrypts a JWT session string.
@@ -27,11 +30,17 @@ const encrypt =
  */
 export const decrypt = async (session: string | undefined = '') => {
   try {
-    const { payload } = await jwtVerify(session, encodedKey, { algorithms: ['HS256'] })
+    const { payload } = await jwtVerify(session, encodedKey, {
+      algorithms: ['HS256']
+    })
 
     return payload
   } catch (error) {
-    console.error('Failed to verify session')
+    if (error instanceof Error) {
+      console.error(error.message)
+    } else {
+      console.error('Failed to verify session')
+    }
   }
 }
 
@@ -45,5 +54,11 @@ export const createSession = async (userId: string) => {
   const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000)
   const cookieStore = await cookies()
 
-  cookieStore.set('session', await encrypt({ userId, expiresAt }), { httpOnly: true, secure: true, expires: expiresAt, sameSite: 'lax', path: '/' })
+  cookieStore.set('session', await encrypt({ userId, expiresAt }), {
+    httpOnly: true,
+    secure: true,
+    expires: expiresAt,
+    sameSite: 'lax',
+    path: '/'
+  })
 }

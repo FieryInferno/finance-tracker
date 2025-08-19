@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from "next/server"
+import { NextRequest, NextResponse } from 'next/server'
 import { decrypt } from '@/app/session'
-import { cookies } from "next/headers"
+import { cookies } from 'next/headers'
 
 /**
  * Middleware to handle user authentication based on session cookies.
@@ -11,13 +11,21 @@ import { cookies } from "next/headers"
  * @param {NextRequest} req - The incoming request object from Next.js.
  * @returns {Promise<NextResponse>} A redirect response or the next middleware/handler response.
  */
-export default async (req: NextRequest): Promise<NextResponse> => {
+export default async function middleware(
+  req: NextRequest
+): Promise<NextResponse> {
   const cookie = (await cookies()).get('session')?.value
   const session = await decrypt(cookie)
   const { pathname } = req.nextUrl
 
-  if (pathname === '/dashboard' && !session?.userId) return NextResponse.redirect(new URL('/login', req.nextUrl))
-  if ((pathname === '/login' || pathname === '/') && session?.userId && !pathname.startsWith('/dashboard')) return NextResponse.redirect(new URL('/dashboard', req.nextUrl))
+  if (pathname === '/dashboard' && !session?.userId)
+    return NextResponse.redirect(new URL('/login', req.nextUrl))
+  if (
+    (pathname === '/login' || pathname === '/') &&
+    session?.userId &&
+    !pathname.startsWith('/dashboard')
+  )
+    return NextResponse.redirect(new URL('/dashboard', req.nextUrl))
 
   return NextResponse.next()
 }
@@ -32,5 +40,5 @@ export default async (req: NextRequest): Promise<NextResponse> => {
  * - Static image assets ending with `.png`
  */
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
+  matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)']
 }

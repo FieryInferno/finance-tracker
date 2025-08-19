@@ -23,7 +23,9 @@ describe('LoginUseCase', () => {
     const result = await loginUseCase.login('test@example.com', 'secure123')
 
     expect(result).toEqual(mockUser)
-    expect(mockUserRepository.get).toHaveBeenCalledWith({ email: 'test@example.com' })
+    expect(mockUserRepository.get).toHaveBeenCalledWith({
+      email: 'test@example.com'
+    })
   })
 
   it('should throw AuthError if user not found', async () => {
@@ -39,7 +41,10 @@ describe('LoginUseCase', () => {
   })
 
   it('should throw AuthError if password is incorrect', async () => {
-    const mockUser: User = { email: 'test@example.com', password: 'correctPassword' }
+    const mockUser: User = {
+      email: 'test@example.com',
+      password: 'correctPassword'
+    }
 
     mockUserRepository.get.mockResolvedValue(mockUser)
 

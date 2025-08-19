@@ -4,17 +4,17 @@ import Validator from '@/app/validator'
 import { isDevelopment } from '@/app/utils'
 
 jest.mock('@/app/(admin)/categories/create/category.service', () => ({
-  create: jest.fn(),
+  create: jest.fn()
 }))
 jest.mock('@/app/validator')
 jest.mock('@/app/utils', () => ({
-  isDevelopment: true,
+  isDevelopment: true
 }))
 
 const mockValidatorInstance = {
   object: jest.fn().mockReturnThis(),
   string: jest.fn().mockReturnThis(),
-  safeParse: jest.fn(),
+  safeParse: jest.fn()
 }
 
 ;(Validator as jest.Mock).mockImplementation(() => mockValidatorInstance)
@@ -29,9 +29,9 @@ describe('create', () => {
       success: false,
       error: {
         fieldErrors: {
-          name: ['Name is required'],
-        },
-      },
+          name: ['Name is required']
+        }
+      }
     })
 
     const formData = new FormData()
@@ -42,8 +42,8 @@ describe('create', () => {
 
     expect(result).toEqual({
       errors: {
-        name: ['Name is required'],
-      },
+        name: ['Name is required']
+      }
     })
   })
 
@@ -63,7 +63,9 @@ describe('create', () => {
 
   it('should return error message if creation fails', async () => {
     mockValidatorInstance.safeParse.mockReturnValueOnce({ success: true })
-    ;(categoryService.create as jest.Mock).mockRejectedValueOnce(new Error('DB error'))
+    ;(categoryService.create as jest.Mock).mockRejectedValueOnce(
+      new Error('DB error')
+    )
 
     const formData = new FormData()
     formData.set('name', 'Books')

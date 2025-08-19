@@ -6,16 +6,24 @@ import Error from './error'
 import Loading from './loading'
 import { ErrorBoundary } from './error-boundary'
 
-const ListCategories = dynamic(() => import(`./list-categories.component/index`),  { loading: () => <Loading /> })
+const ListCategories = dynamic(
+  () => import(`./list-categories.component/index`),
+  { loading: () => <Loading /> }
+)
 
 export default async function CategoriesPage() {
   return (
     <div className={styles['kategori-list-container']}>
-      <h2 className="mb-4 font-bold text-2xl">Your Categories</h2>
+      <h2 className='mb-4 font-bold text-2xl'>Your Categories</h2>
       <ErrorBoundary FallbackComponent={Error}>
         <ListCategories />
       </ErrorBoundary>
-      <Link className={styles.fab} href="/categories/create">+</Link>
+      <Link
+        className={styles.fab}
+        href='/categories/create'
+      >
+        +
+      </Link>
     </div>
   )
 }

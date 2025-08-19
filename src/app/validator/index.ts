@@ -3,7 +3,9 @@ interface ValidatorInterface {
   object(param: Record<string, ValidatorInterface>): this
   string(): this
   email(param?: { message: string }): this
-  safeParse(data: {}): { success: true, error: {} } | { success: false, error: { fieldErrors: Record<string, string[]> } }
+  safeParse(data: {}):
+    | { success: true; error: {} }
+    | { success: false; error: { fieldErrors: Record<string, string[]> } }
 }
 class Validator implements ValidatorInterface {
   rules: Array<(value: any) => string | null> = []
@@ -15,13 +17,15 @@ class Validator implements ValidatorInterface {
     return this
   }
   string() {
-    this.rules.push((value) => typeof value !== 'string' ? 'Invalid string' : null)
+    this.rules.push((value) =>
+      typeof value !== 'string' ? 'Invalid string' : null
+    )
 
     return this
   }
   email(param?: { message: string }) {
     this.rules.push((value) => {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
       if (!emailRegex.test(value)) return param?.message || 'Invalid email'
 
@@ -40,13 +44,14 @@ class Validator implements ValidatorInterface {
 
           if (error) {
             if (fieldErrors[key]) fieldErrors[key].push(error)
-            else fieldErrors[key] = [error];
+            else fieldErrors[key] = [error]
           }
         }
       }
     }
 
-    if (Object.keys(fieldErrors).length === 0) return { success: true as const, error: {} }
+    if (Object.keys(fieldErrors).length === 0)
+      return { success: true as const, error: {} }
 
     return { success: false as const, error: { fieldErrors } }
   }
