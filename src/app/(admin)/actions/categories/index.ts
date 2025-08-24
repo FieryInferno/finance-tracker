@@ -3,7 +3,8 @@
 import Validator from '@/app/validator'
 import categoryService from '@/app/(admin)/categories/category.service'
 import { isDevelopment } from '@/app/utils'
-import { FormCategoryState, Category } from '../../categories/types'
+import { FormCategoryState } from '../../categories/types'
+import { Category } from '../../types'
 import { revalidatePath } from 'next/cache'
 
 export const create = async (
@@ -35,8 +36,11 @@ export const create = async (
     return { error: 'Failed create category' }
   }
 }
-export const read = async (): Promise<Category[]> =>
-  await categoryService.read()
+export const read = async (): Promise<Category[]> => {
+  const categories = await categoryService.read()
+
+  return JSON.parse(JSON.stringify(categories))
+}
 export const deleteCategory = async (id: string) => {
   const response = await categoryService.delete(id)
 

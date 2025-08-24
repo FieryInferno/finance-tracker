@@ -3,7 +3,7 @@
 import { useActionState, useEffect } from 'react'
 import styles from './form-category.component.module.css'
 import { FormCategoryState } from '../types'
-import toast, { Toaster } from 'react-hot-toast'
+import toast from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
 
 type FormCategory = (
@@ -50,7 +50,6 @@ export default function FormCategory({
           <span className='font-medium'>Error!&nbsp;</span> {state.error}
         </div>
       )}
-      <Toaster position='top-right' />
       <form
         className={styles['form-kategori']}
         action={action}

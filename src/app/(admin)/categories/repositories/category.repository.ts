@@ -1,7 +1,7 @@
 import CategoryRepositoryInterface from '@/app/(admin)/categories/repositories/category.repository.interface'
 import CategoryModel from '../category.entity'
 import { isDevelopment } from '@/app/utils'
-import { Category } from '../types'
+import { Category } from '@/app/(admin)/types'
 import { v4 as uuidv4 } from 'uuid'
 
 export default class CategoryRepository implements CategoryRepositoryInterface {
