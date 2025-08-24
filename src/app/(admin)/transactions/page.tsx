@@ -44,7 +44,7 @@ export default async function TransactionsPage() {
       title='No Transactions Found'
       subtitle='Your transaction history will appear here once you start recording them.'
       titleButton='Add Transaction'
-      href='/transactions/add'
+      href='/transactions/create'
     />
   )
 }

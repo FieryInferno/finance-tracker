@@ -3,7 +3,7 @@
 import Validator from '@/app/validator'
 import categoryService from '@/app/(admin)/categories/category.service'
 import { isDevelopment } from '@/app/utils'
-import { FormCategoryState, Category } from '../types'
+import { FormCategoryState, Category } from '../../categories/types'
 import { revalidatePath } from 'next/cache'
 
 export const create = async (

@@ -3,7 +3,7 @@
 import Swal from 'sweetalert2'
 import toast from 'react-hot-toast'
 import { useActionState, startTransition } from 'react'
-import { deleteCategory } from '../../_actions/actions'
+import { deleteCategory } from '../../../actions/categories'
 import { isDevelopment } from '@/app/utils'
 
 export default function ButtonDeleteCategory({

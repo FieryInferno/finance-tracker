@@ -1,5 +1,5 @@
 import CategoryItem from './category-item.component'
-import { read } from '../_actions/actions'
+import { read } from '../../actions/categories'
 
 export default async function ListCategories() {
   const categories = await read()

@@ -1,4 +1,4 @@
-import { create } from './actions'
+import { create } from '.'
 import categoryService from '@/app/(admin)/categories/category.service'
 import Validator from '@/app/validator'
 
