@@ -11,7 +11,7 @@ export default function ButtonDeleteCategory({
 }: {
   id_category: string
 }) {
-  const [state, action, pending] = useActionState(deleteCategory, id_category)
+  const [, action, pending] = useActionState(deleteCategory, id_category)
   const onclick = async () => {
     const result = await Swal.fire({
       title: 'Are you sure!',
@@ -27,7 +27,6 @@ export default function ButtonDeleteCategory({
 
     try {
       startTransition(action)
-      // await new Promise(resolve => setTimeout(resolve, 2000)) // Simulate loading delay
       toast.success('Category deleted successfully')
     } catch (error) {
       if (isDevelopment) console.error(error)

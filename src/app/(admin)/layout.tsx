@@ -1,4 +1,4 @@
-import Navbar from './navbar.component'
+import Navbar from './components/navbar.component/index'
 
 export default async function DashboardLayout({
   children
@@ -7,7 +7,7 @@ export default async function DashboardLayout({
 }) {
   return (
     <>
-      <div className='p-4 mb-12'>{children}</div>
+      <div className='mb-12 p-4'>{children}</div>
       <Navbar />
     </>
   )

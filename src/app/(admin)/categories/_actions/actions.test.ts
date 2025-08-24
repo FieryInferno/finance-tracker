@@ -1,7 +1,6 @@
 import { create } from './actions'
 import categoryService from '@/app/(admin)/categories/category.service'
 import Validator from '@/app/validator'
-import { isDevelopment } from '@/app/utils'
 
 jest.mock('@/app/(admin)/categories/create/category.service', () => ({
   create: jest.fn()

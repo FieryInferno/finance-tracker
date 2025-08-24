@@ -1,9 +1,9 @@
 import React from 'react'
-import styles from './layout.module.css'
-import Link from 'next/link'
+import styles from './page.module.css'
 import dynamic from 'next/dynamic'
 import Error from './error'
 import Loading from './loading'
+import FloatingActionButton from '../components/floating-action-button.component/floating-action-button.component'
 import { ErrorBoundary } from './error-boundary'
 
 const ListCategories = dynamic(
@@ -18,12 +18,7 @@ export default async function CategoriesPage() {
       <ErrorBoundary FallbackComponent={Error}>
         <ListCategories />
       </ErrorBoundary>
-      <Link
-        className={styles.fab}
-        href='/categories/create'
-      >
-        +
-      </Link>
+      <FloatingActionButton href='/categories/create'>+</FloatingActionButton>
     </div>
   )
 }

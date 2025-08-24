@@ -27,7 +27,7 @@ export default function FormCategory({
 
       return () => clearTimeout(timer)
     }
-  }, [state])
+  }, [state, router])
 
   return (
     <>
