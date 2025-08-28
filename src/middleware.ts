@@ -18,7 +18,7 @@ export default async function middleware(
   const session = await decrypt(cookie)
   const { pathname } = req.nextUrl
 
-  if (pathname === '/dashboard' && !session?.userId)
+  if (pathname !== '/login' && pathname !== '/' && !session?.userId)
     return NextResponse.redirect(new URL('/login', req.nextUrl))
   if (
     (pathname === '/login' || pathname === '/') &&

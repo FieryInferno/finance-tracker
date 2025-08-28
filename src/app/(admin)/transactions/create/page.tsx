@@ -1,7 +1,6 @@
-import dynamic from 'next/dynamic'
+import FormTransaction from './form-transaction.component'
 import { read } from '../../actions/categories'
-
-const FormTransaction = dynamic(() => import('./form-transaction.component'))
+import { create } from './actions'
 
 export default async function CreateTransactionPage() {
   const categories = await read()
@@ -9,7 +8,10 @@ export default async function CreateTransactionPage() {
   return (
     <div className='m-auto p-4 max-w-[400px]'>
       <h2 className='font-bold text-2xl text-center'>Tambah Transaksi</h2>
-      <FormTransaction categories={categories} />
+      <FormTransaction
+        categories={categories}
+        create={create}
+      />
     </div>
   )
 }

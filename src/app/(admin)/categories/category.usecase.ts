@@ -1,4 +1,4 @@
-import { Category } from '../types';
+import { Category } from '../types'
 import CategoryRepositoryInterface from '@/app/(admin)/categories/repositories/category.repository.interface'
 
 export default class CategoryUseCase {

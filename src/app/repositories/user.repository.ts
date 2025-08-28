@@ -1,6 +1,6 @@
 import UserRepositoryInterface from '@/app/repositories/user.repository.interface'
 import { User } from '@/app/types'
-import { isDevelopment } from '@/app/utils'
+import { isDevelopment } from '@/app/configs'
 
 /**
  * @class UserRepository
@@ -34,7 +34,7 @@ export default class UserRepository implements UserRepositoryInterface {
       const SPREADSHEET_ID = process.env.SPREADSHEET_ID
       const API_KEY_GOOGLESHEET = process.env.API_KEY_GOOGLESHEET
       const response = await fetch(
-        `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/Sheet1!A2:B1000?key=${API_KEY_GOOGLESHEET}`
+        `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/USERS!A2:B1000?key=${API_KEY_GOOGLESHEET}`
       )
       const { values } = (await response.json()) ?? {}
       const data = values.find((value: string[]) => value[0] === params?.email)

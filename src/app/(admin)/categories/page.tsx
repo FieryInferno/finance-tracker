@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './page.module.css'
 import dynamic from 'next/dynamic'
-import Error from './error'
+import Error from '../error'
 import Loading from './loading'
 import FloatingActionButton from '../components/floating-action-button.component/floating-action-button.component'
 import { ErrorBoundary } from './error-boundary'

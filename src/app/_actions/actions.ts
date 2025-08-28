@@ -3,7 +3,7 @@
 import Validator from '@/app/validator'
 import loginService from '@/app/login.service'
 import AuthError from '../auth.error'
-import { isDevelopment } from '../utils'
+import { isDevelopment } from '../configs'
 import { createSession } from '@/app/session'
 import { redirect } from 'next/navigation'
 

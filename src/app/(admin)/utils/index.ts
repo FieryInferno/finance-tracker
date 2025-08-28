@@ -1,6 +1,9 @@
-import Swal from "sweetalert2"
+import Swal from 'sweetalert2'
 
-export const showConfirmation = async (text: string, confirmButtonText: string) => {
+export const showConfirmation = async (
+  text: string,
+  confirmButtonText: string
+) => {
   const result = await Swal.fire({
     title: 'Are you sure!',
     text: text,

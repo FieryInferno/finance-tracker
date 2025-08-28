@@ -2,7 +2,7 @@
 
 import Validator from '@/app/validator'
 import categoryService from '@/app/(admin)/categories/category.service'
-import { isDevelopment } from '@/app/utils'
+import { isDevelopment } from '@/app/configs'
 import { FormCategoryState } from '../../categories/types'
 import { Category } from '../../types'
 import { revalidatePath } from 'next/cache'
