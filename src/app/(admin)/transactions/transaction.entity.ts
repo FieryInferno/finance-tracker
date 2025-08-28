@@ -1,7 +1,7 @@
 import { TTransaction } from './types'
 
 export default class Transaction implements TTransaction {
-  id_transaction?: number
+  id_transaction?: string
   date: string
   amount: number
   id_category: string
@@ -33,4 +33,6 @@ export default class Transaction implements TTransaction {
     this.note = data?.note
     this.photo = data?.photo
   }
+
+  static fromJson = (json: TTransaction): Transaction => new Transaction(json)
 }

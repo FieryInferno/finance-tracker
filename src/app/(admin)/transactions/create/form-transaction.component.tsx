@@ -2,7 +2,7 @@
 
 import styles from './form-transaction.module.css'
 import toast from 'react-hot-toast'
-import { TTransaction } from './types'
+import { TTransaction } from '../types'
 import { startTransition, useActionState } from 'react'
 import { Category } from '../../types'
 import { showConfirmation } from '@/app/(admin)/utils'

@@ -4,4 +4,5 @@ export default interface ITransactionRepository {
   create(
     data: TTransaction
   ): Promise<{ data: TTransaction | null; error: string | null }>
+  read(): Promise<{ data: TTransaction[] | null; error: string | null }>
 }

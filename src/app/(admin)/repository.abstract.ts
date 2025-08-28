@@ -64,4 +64,20 @@ export default abstract class ARepository {
       }
     }
   }
+
+  /**
+   * Reads data from a specified Google Sheet and processes the response using a callback function.
+   *
+   * @template TResponseJson - The type of the raw response data from the Google Sheet.
+   * @template TFinalData - The type of the final processed data returned by the callback.
+   * @param sheet - The name or identifier of the sheet to read from.
+   * @param cb - A callback function that receives the raw response data and returns the processed data.
+   * @returns A promise that resolves to the processed data of type `TFinalData`.
+   */
+  protected _read = async <TResponseJson, TFinalData>(sheet: string, cb: (data: { values: TResponseJson }) => TFinalData) =>
+    await this.handleResponse<{ values: TResponseJson }, TFinalData>(
+      fetch(
+        `${process.env.URL_GOOGLE_SHEET}${sheet}!A2:F1000?key=${process.env.API_KEY_GOOGLESHEET}`
+      ), cb
+    )
 }

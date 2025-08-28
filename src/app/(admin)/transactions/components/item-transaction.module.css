@@ -1,0 +1,44 @@
+.transaksi-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+}
+.transaksi-info {
+  display: flex;
+  flex-direction: column;
+}
+.transaksi-tanggal {
+  font-size: 0.9rem;
+  color: #666;
+}
+.transaksi-kategori {
+  font-weight: bold;
+  color: #333;
+}
+.transaksi-catatan {
+  font-size: 0.9rem;
+  color: #444;
+}
+.bukti-link {
+  font-size: 0.9rem;
+  color: #1e88e5;
+  text-decoration: underline;
+  margin-top: 0.25rem;
+}
+.transaksi-nominal {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+.transaksi-nominalKeluar {
+  composes: transaksi-nominal;
+  color: #f44336;
+}
+.transaksi-nominalMasuk {
+  composes: transaksi-nominal;
+  color: #4caf50;
+}
