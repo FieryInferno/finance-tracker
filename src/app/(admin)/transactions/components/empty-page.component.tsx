@@ -10,7 +10,7 @@ export default function EmptyPage({
   href: string
 }) {
   return (
-    <div className='flex flex-col justify-center items-center bg-gray-50 h-screen'>
+    <div className='flex flex-col justify-center items-center h-screen'>
       <div className='text-center'>
         <svg
           className='mx-auto w-16 h-16 text-gray-400'

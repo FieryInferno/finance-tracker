@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 import Error from '../error'
 import Loading from './loading'
 import FloatingActionButton from '../components/floating-action-button.component/floating-action-button.component'
-import { ErrorBoundary } from './error-boundary'
+import { ErrorBoundary } from '../components/error-boundary'
 
 const ListCategories = dynamic(
   () => import(`./list-categories.component/index`),
