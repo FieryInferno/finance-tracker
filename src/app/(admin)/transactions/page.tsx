@@ -1,6 +1,7 @@
 import styles from './page.module.css'
 import EmptyPage from './components/empty-page.component'
 import ItemTransaction from './components/item-transaction.component'
+import FloatingActionButton from '../components/floating-action-button.component/floating-action-button.component'
 import { TTransaction } from './types'
 import { getTransactions } from './actions'
 
@@ -28,6 +29,7 @@ export default async function TransactionsPage() {
           />
         ))}
       </ul>
+      <FloatingActionButton href='/transactions/create'>+</FloatingActionButton>
     </div>
   )
 }
