@@ -13,7 +13,7 @@ export default class TransactionRepository
    * Creates a new transaction record by sending the provided transaction data to a Google Sheet via a POST request.
    *
    * @param {TTransaction} param0 - The transaction data to be created, including date, amount, category ID, note, and photo.
-   * @returns {Promise<{ data: TTransaction | null; error: string | null }>} 
+   * @returns {Promise<{ data: TTransaction | null; error: string | null }>}
    *          A promise that resolves to an object containing the created transaction data or an error message.
    */
   async create({
@@ -50,8 +50,15 @@ export default class TransactionRepository
   async read() {
     const [transactions, categories] = await Promise.all([
       this._read<Array<Array<string>>, TTransaction[]>('TRANSACTIONS', (data) =>
-        (data.values ?? []).map(([id_transaction, date, amount, id_category, note]) =>
-          Transaction.fromJson({ id_transaction, date, amount: +amount, id_category, note })
+        (data.values ?? []).map(
+          ([id_transaction, date, amount, id_category, note]) =>
+            Transaction.fromJson({
+              id_transaction,
+              date,
+              amount: +amount,
+              id_category,
+              note
+            })
         )
       ),
       new CategoryRepository().read()
@@ -59,11 +66,14 @@ export default class TransactionRepository
 
     return {
       error: null,
-      data: transactions
-        ?.data
-        ?.map(
-          (transaction) => Transaction.fromJson({ ...transaction, category: categories.data?.find((cat) => cat.id_category === transaction.id_category) })
-        ) as TTransaction[]
+      data: transactions?.data?.map((transaction) =>
+        Transaction.fromJson({
+          ...transaction,
+          category: categories.data?.find(
+            (cat) => cat.id_category === transaction.id_category
+          )
+        })
+      ) as TTransaction[]
     }
   }
 }

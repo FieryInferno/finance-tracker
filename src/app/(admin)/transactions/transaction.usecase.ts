@@ -16,7 +16,5 @@ export default class TransactionUseCase
       this.repository.create(new Transaction(data))
     )
   read = async () =>
-    await this.handleResponse<TTransaction[]>(
-      this.repository.read()
-    )
+    await this.handleResponse<TTransaction[]>(this.repository.read())
 }

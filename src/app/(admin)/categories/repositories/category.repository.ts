@@ -4,7 +4,10 @@ import CategoryModel from '../category.entity'
 import { Category } from '@/app/(admin)/types'
 import { v4 as uuidv4 } from 'uuid'
 
-export default class CategoryRepository extends ARepository implements CategoryRepositoryInterface {
+export default class CategoryRepository
+  extends ARepository
+  implements CategoryRepositoryInterface
+{
   /**
    * Creates a new category with the specified name and color.
    *
@@ -28,11 +31,14 @@ export default class CategoryRepository extends ARepository implements CategoryR
     return await this.handleResponse<
       { values: Array<Array<string>> },
       Category
-    >(fetch(process.env.URL_POST_GOOGLE_SHEET!, { body, method: 'POST' }), () => ({
-      id_category,
-      name,
-      color
-    }))
+    >(
+      fetch(process.env.URL_POST_GOOGLE_SHEET!, { body, method: 'POST' }),
+      () => ({
+        id_category,
+        name,
+        color
+      })
+    )
   }
 
   async delete(id_category: string) {
@@ -54,9 +60,10 @@ export default class CategoryRepository extends ARepository implements CategoryR
    *          - `data`: An array of `Category` objects if successful, or `null` on error.
    *          - `error`: A string describing the error if it occurred, otherwise `null`.
    */
-  read = async () => await this._read<Array<Array<string>>, Category[]>('CATEGORIES', (data) =>
-    (data.values ?? []).map(([id_category, name, color]) =>
-      CategoryModel.fromJson({ id_category, name, color })
+  read = async () =>
+    await this._read<Array<Array<string>>, Category[]>('CATEGORIES', (data) =>
+      (data.values ?? []).map(([id_category, name, color]) =>
+        CategoryModel.fromJson({ id_category, name, color })
+      )
     )
-  )
 }
