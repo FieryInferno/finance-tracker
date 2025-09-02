@@ -20,7 +20,7 @@ export default async function TransactionsPage() {
         transactions.map((transaction) => <ItemTransaction
           key={`transaction-${transaction.id_transaction}`}
           date={transaction.date}
-          category={transaction.id_category}
+          category={transaction.category!}
           note={transaction.note}
           amount={transaction.amount}
         />)

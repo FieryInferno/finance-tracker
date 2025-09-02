@@ -3,6 +3,7 @@ import ARepository from '@/app/(admin)/repository.abstract'
 import Transaction from '../transaction.entity'
 import { TTransaction } from '../types'
 import { v4 as uuidv4 } from 'uuid'
+import CategoryRepository from '../../categories/repositories/category.repository'
 
 export default class TransactionRepository
   extends ARepository
@@ -46,14 +47,23 @@ export default class TransactionRepository
     )
   }
 
-  /**
-   * Reads transaction data from the 'TRANSACTIONS' source and maps each entry to a `Transaction` instance.
-   *
-   * @returns A promise that resolves to an array of `Transaction` objects.
-   */
-  read = async () => await this._read<Array<Array<string>>, TTransaction[]>('TRANSACTIONS', (data) =>
-    (data.values ?? []).map(([id_transaction, date, amount, id_category, note]) =>
-      Transaction.fromJson({ id_transaction, date, amount: +amount, id_category, note })
-    )
-  )
+  async read() {
+    const [transactions, categories] = await Promise.all([
+      this._read<Array<Array<string>>, TTransaction[]>('TRANSACTIONS', (data) =>
+        (data.values ?? []).map(([id_transaction, date, amount, id_category, note]) =>
+          Transaction.fromJson({ id_transaction, date, amount: +amount, id_category, note })
+        )
+      ),
+      new CategoryRepository().read()
+    ])
+
+    return {
+      error: null,
+      data: transactions
+        ?.data
+        ?.map(
+          (transaction) => Transaction.fromJson({ ...transaction, category: categories.data?.find((cat) => cat.id_category === transaction.id_category) })
+        ) as TTransaction[]
+    }
+  }
 }

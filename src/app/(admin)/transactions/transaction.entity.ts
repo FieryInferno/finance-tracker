@@ -1,3 +1,4 @@
+import { Category } from '../types'
 import { TTransaction } from './types'
 
 export default class Transaction implements TTransaction {
@@ -5,6 +6,7 @@ export default class Transaction implements TTransaction {
   date: string
   amount: number
   id_category: string
+  category?: Category | undefined
   note?: string
   photo?: File
 
@@ -30,6 +32,7 @@ export default class Transaction implements TTransaction {
     this.date = date
     this.amount = +amount
     this.id_category = id_category
+    this.category = data?.category
     this.note = data?.note
     this.photo = data?.photo
   }
